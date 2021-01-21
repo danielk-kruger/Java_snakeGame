@@ -15,8 +15,8 @@ public class GamePanel extends JPanel implements ActionListener {
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT)/UNIT_SIZE;
     static final int DELAY = 75;
-    final int x[] = new int[GAME_UNITS]; // Holds the X co-ordinates of the body parts
-    final int y[] = new int[GAME_UNITS]; // Holds the Y co-ordinates of the body parts
+    final int[] x = new int[GAME_UNITS]; // Holds the X co-ordinates of the body parts
+    final int[] y = new int[GAME_UNITS]; // Holds the Y co-ordinates of the body parts
     int bodyParts = 1;
     int applesEaten;
     int appleX;
@@ -50,11 +50,6 @@ public class GamePanel extends JPanel implements ActionListener {
     public void draw(Graphics g) {
 
         if (running) {
-//            /*
-//            for (int i = 0; i < SCREEN_HEIGHT/UNIT_SIZE; i++) {
-//                g.drawLine(i*UNIT_SIZE, 0, i*UNIT_SIZE, SCREEN_HEIGHT);
-//                g.drawLine(0, i*UNIT_SIZE, SCREEN_WIDTH, i*UNIT_SIZE);
-//            }*/
             g.setColor(Color.RED);
             g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 
@@ -86,7 +81,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void move() {
         for (int i = bodyParts; i > 0; i--) {
-            x[i] = x[i-1]; // Shifting co-ordinates over by one index
+            x[i] = x[i-1]; // Shifting coordinates over by one index
             y[i] = y[i-1];
         }
 
@@ -124,21 +119,20 @@ public class GamePanel extends JPanel implements ActionListener {
             }
         }
         // Check if head touches left border
-        if (x[0] < 0) {
-            running = false;
-        }
+        if (x[0] < 0)
+        	running = false;
+        
         // Check if head touches right border
-        if (x[0] > SCREEN_WIDTH) {
-            running = false;
-        }
+        if (x[0] > SCREEN_WIDTH)
+        	running = false;
+        
         // Check if head touches top border
-        if (y[0] < 0) {
-            running = false;
-        }
+        if (y[0] < 0)
+        	running = false;
+        
         // Check if head touches bottom border
-        if (y[0] > SCREEN_HEIGHT) {
-            running = false;
-        }
+        if (y[0] > SCREEN_HEIGHT)
+        	running = false;
 
         if (!running) {
             timer.stop();
@@ -151,6 +145,7 @@ public class GamePanel extends JPanel implements ActionListener {
         g.setFont(new Font("Ink Free", Font.BOLD, 40));
         FontMetrics metrics1 = getFontMetrics(g.getFont());
         g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: " + applesEaten))/2, g.getFont().getSize());
+        
         // Game Over text
         g.setColor(Color.RED);
         g.setFont(new Font("Ink Free", Font.BOLD, 75));
@@ -175,24 +170,20 @@ public class GamePanel extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             switch(e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                    if (direction != 'R') {
-                        direction = 'L';
-                    }
+                    if (direction != 'R')
+                    	direction = 'L';
                     break;
                 case KeyEvent.VK_RIGHT:
-                    if (direction != 'L') {
-                        direction = 'R';
-                    }
+                    if (direction != 'L')
+                    	direction = 'R';
                     break;
                 case KeyEvent.VK_UP:
-                    if (direction != 'D') {
-                        direction = 'U';
-                    }
+                    if (direction != 'D')
+                    	direction = 'U';
                     break;
                 case KeyEvent.VK_DOWN:
-                    if (direction != 'U') {
-                        direction = 'D';
-                    }
+                    if (direction != 'U')
+                    	direction = 'D';
                     break;
             }
         }
