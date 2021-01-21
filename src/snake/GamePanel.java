@@ -162,7 +162,6 @@ public class GamePanel extends JPanel implements ActionListener {
         }
 
         repaint();
-        System.out.println("Hello World!");
     }
 
     public class MyKeyAdapter extends KeyAdapter {
